@@ -66,7 +66,7 @@ function RenderNotes() {
                 }, this.previousElementSibling.value, this.value)">${
       note.content
     }</textarea>
-                <hr>
+                
                 <div class="note-footer">
                     <p>Last edited <span class="createAt">${formateDate(
                       note.date

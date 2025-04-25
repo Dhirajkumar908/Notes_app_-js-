@@ -1,0 +1,147 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --main-bg: #D0DAD6;
+    --second-bg: #A1B5AE;
+    --sidebar-bg: #0B241A;
+    --button: #15471B;
+}
+
+body {
+    background-color: var(--main-bg);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 210px;
+    background-color: var(--sidebar-bg);
+    color: white;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 8px;
+}
+
+.addNote, .searchNote {
+    width: 180px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 15px;
+    padding: 10px 12px;
+    font-size: 15px;
+}
+
+.main {
+    margin-left: 210px;
+    padding: 20px;
+    width: calc(100% - 210px);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    background-color: var(--main-bg);
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px rgb(2, 52, 117);
+    padding: 15px 15px 0px 15px;
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 0px 5px 0px rgb(2, 52, 117);
+}
+
+.notes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.note-tile {
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    background: transparent;
+}
+
+.note-description {
+    border: none;
+    height: 150px;
+    resize: none;
+    background: transparent;
+    font-size: 14px;
+    color: #333;
+}
+
+.note-tile:focus,
+.note-description:focus,
+.searchNote:focus {
+    outline: none;
+}
+
+.note-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.note-footer button {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+footer {
+    margin-top: auto;
+    font-size: 13px;
+    padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        flex-direction: row;
+        height: auto;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
