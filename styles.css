@@ -10,6 +10,12 @@
     --sidebar-bg:#0B241A;
     --button:#15471B;
 }
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 body{
     height: 100vh;
     background-color: var(--main-bg);
@@ -27,11 +33,11 @@ body{
     padding: 15px;
 }
 .addNote, .searchNote{
-    width: 180px;
+    width: 160px;
     border-radius: 10px;
     border:none;
     margin-top: 15px;
-    padding:8px 10px;
+    padding:5px 8px;
 }
 
 .main{
@@ -45,14 +51,26 @@ body{
     padding:15px 20px;
 }
 
+.noteitem {
+    width: 340px;
+    height:250px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px rgb(2, 52, 117);
+    transition:transform 0.5s ease-in-out;
+}
+.noteitem:hover{
+    transform: scale(1.05);
+}
 .card{
-    width: 350px;
+    width: 340px;
     height:250px;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0px 0px 5px 0px rgb(2, 52, 117);
     padding:10px 15px;
+    transition:transform 0.9s ease-in-out, border 0.9s ease;
 }
+
+
 .notes{
     display: flex;
     flex-direction: column;
@@ -61,7 +79,7 @@ body{
 
 .note-tile{
     border: none;
-    font-size: 18px;
+    font-size: 16px;
 }
 .note-description{
     height: 160px;
