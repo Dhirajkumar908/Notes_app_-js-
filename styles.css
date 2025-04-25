@@ -69,7 +69,7 @@ body{
     resize: none;
 }
 
-.note-tile:focus, .note-description:focus{
+.note-tile:focus, .note-description:focus, .searchNote:focus{
     outline: none;
 }
 

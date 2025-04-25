@@ -17,7 +17,7 @@ function formateDate(date) {
 
 function saveNote() {
   console.log(notes);
-  
+
   localStorage.setItem("notes", JSON.stringify(notes));
 }
 
@@ -31,7 +31,7 @@ function AddNotes() {
   notes.unshift(note);
   saveNote();
   RenderNotes();
-  document.querySelector(`#note-${note.id} .note-tile`).focus()
+  document.querySelector(`#note-${note.id} .note-tile`).focus();
 }
 
 function RenderNotes() {
@@ -45,49 +45,84 @@ function RenderNotes() {
         `;
     return;
   }
-  noteContainer.innerHTML=""
+  noteContainer.innerHTML = "";
 
-  notes.forEach((note,inx) => {
-    console.log(inx,note.id);
-    
-    const item=document.createElement("div")
-    item.id=`note-${note.id}`
-    item.innerHTML= `
+  notes.forEach((note, inx) => {
+    console.log(inx, note.id);
+
+    const item = document.createElement("div");
+    item.classList.add('noteitem')
+    item.id = `note-${note.id}`;
+    item.innerHTML = `
      <div class="card" id="${note.id}">
             <div class="notes">
-                <input class="note-tile" type="text" value="${note.title}" onchange="updateNote(${note.id}, this.value, this.nextElementSibling.value)">
-                <textarea class="note-description" name="" id="" onchange="updateNote(${note.id}, this.previousElementSibling.value, this.value)"></textarea>
+                <input class="note-tile" type="text" value="${
+                  note.title
+                }" onchange="updateNote(${
+      note.id
+    }, this.value, this.nextElementSibling.value)">
+                <textarea class="note-description" name="" id="" onchange="updateNote(${
+                  note.id
+                }, this.previousElementSibling.value, this.value)">${
+      note.content
+    }</textarea>
                 <hr>
                 <div class="note-footer">
-                    <p>Last edited <span class="createAt">${formateDate( note.date)}</span></p>
+                    <p>Last edited <span class="createAt">${formateDate(
+                      note.date
+                    )}</span></p>
                     <button class="delete" onclick={deleteNote(${inx})}>Delete</button>
+            
                 </div>
             </div>
          </div>
     `;
     noteContainer.appendChild(item);
   });
-  
 }
 
-function updateNote(id, title, description){
-   const note= notes.find((note)=>note.id===id)
-   console.log(note);
-   if(note){
-    note.title=title;
-    note.content=description;
-    note.date=new Date().toISOString();
-    saveNote()
-    console.log(note);
-   }
-}
-
-
-function deleteNote(id){
-    console.log(notes[id]);
-    notes.pop(notes[id])
+function updateNote(id, title, description) {
+  const note = notes.find((note) => note.id === id);
+  console.log(note);
+  if (note) {
+    note.title = title;
+    note.content = description;
+    note.date = new Date().toISOString();
     saveNote();
-    RenderNotes();
+    console.log(note);
+  }
 }
+
+function deleteNote(id) {
+  console.log(notes[id]);
+  delete notes[id];
+  saveNote();
+  RenderNotes();
+}
+
+function searchNote(query) {
+  console.log(query);
+  const serchTerm = query.toLowerCase();
+  const noteElements = document.querySelectorAll(".noteitem");
+  console.log(noteElements);
+
+  noteElements.forEach((noteEl) => {
+    console.log(noteEl);
+
+    const title = noteEl.querySelector(".note-tile").value.toLowerCase();
+    const content = noteEl
+      .querySelector(".note-description")
+      .value.toLowerCase();
+    console.log(title);
+    console.log(content);
+
+    const isValid = title.includes(serchTerm) || content.includes(serchTerm);
+    noteEl.style.display = isValid ? "block" : "none";
+  });
+}
+
+document.querySelector(".searchNote").addEventListener("input", (e) => {
+  searchNote(e.target.value);
+});
 
 RenderNotes();
